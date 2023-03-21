@@ -2,13 +2,14 @@
 class IntSauadMatrix 
 {
     int[,] matrix;
+    private int size;
     public int ColAndRows { 
-        get => ColAndRows;
+        get => size;
         set
         {
             if (value < 0)
                 throw new ArgumentException("Matrix's size cannot be less than 0");
-            ColAndRows = value;
+            size = value;
         }
     }
     public  IntSauadMatrix(int count)
