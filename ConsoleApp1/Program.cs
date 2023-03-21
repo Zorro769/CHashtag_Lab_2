@@ -2,11 +2,19 @@
 class IntSauadMatrix 
 {
     int[,] matrix;
-    public int ColAndRows { get; set; }
+    public int ColAndRows { 
+        get => ColAndRows;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentException("Matrix's size cannot be less than 0");
+            ColAndRows = value;
+        }
+    }
     public  IntSauadMatrix(int count)
     {
-        matrix = new int[count, count];
-        ColAndRows = matrix.GetLength(0);
+        ColAndRows = count;
+        matrix = new int[ColAndRows, ColAndRows];
     }
     public void FillMatrixRandomly(int min,int max)
     {
@@ -106,7 +114,15 @@ class IntSauadMatrix
     }
     public static void Main()
     {
-        IntSauadMatrix obj = new IntSauadMatrix(5);
+        IntSauadMatrix obj = null;
+        try
+        {
+            obj = new IntSauadMatrix(5);
+        }
+        catch(ArgumentException arg)
+        {
+            Console.WriteLine(arg.Message);
+        }
         obj.FillMatrixRandomly(-20,20);
         obj.ShowMatrix();
         obj.SortMatrixByChrctrstc();
